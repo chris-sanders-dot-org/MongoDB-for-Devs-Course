@@ -1,0 +1,5 @@
+ what is json
+	javascript object notation
+                   {"name":"Andrew"}
+                   {"a":"4","b":"5","c":7,}
+                   {a:6, b:7, fruit:["apple", "pear", "banana"]}

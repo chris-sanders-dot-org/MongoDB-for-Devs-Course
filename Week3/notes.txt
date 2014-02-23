@@ -1,0 +1,16 @@
+Multikeys
+
+db.studends.ensureIndex{('teachers':1)}
+
+.explain - at the end of a query to see what mondodb did to perform the query.
+
+Benefits of embedding:
+    performance
+    one round trip to the db
+
+Document size limit = 16MB
+
+GridFS
+    Can break larger data into chunks, which fit into the 16mb size limit
+
+

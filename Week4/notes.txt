@@ -1,0 +1,67 @@
+Don't want to scan entire collection.
+
+Indexes
+
+Creating Indexes
+
+db.collection.ensureIndex({key:1})
+    ,class:-1
+
+    1 = ascending
+    -1 = descending
+        Matters in sorting.
+
+Discovering indexes
+    db.system.indexes.find()
+
+    (dropIndex) = use same syntax used to create the index to delete it.
+
+Multikey Indexes
+
+    A key can hold an array
+
+    ensureIndex({arrayname:1})
+
+    Will create an index point for every point of the array.
+
+    Add a key to a sub-array.
+        arrayname.arrayitem
+            (address.phones)
+
+Index Creation Option, Unique
+    db.collection.ensureIndex({array:1},{unique:true})
+
+Index Creation, Removing Dupes
+    unique:true
+    dropDups:true  --- Dangerous, it will drop dupes, no way to control which one.
+
+    both must be set.
+
+Index Creation, Sparse - {sparse:1}
+    if an index key isn't in a document, it will map to null - sparse index solves this.
+    dup key { : null }
+
+Index Creation, Background
+    index created in the foreground by default - blocks other writers
+
+    foreground
+        fast
+        blocks writers
+
+    background:true
+        slow
+            2x to 5x
+         does not block writers
+         mongodb can only build one index at a time per database
+
+Using Explain
+
+
+hw4-3:
+> db.system.indexes.find()
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "blog.users", "name" : "_id_" }
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "blog.sessions", "name" : "_id_" }
+{ "v" : 1, "key" : { "_id" : 1 }, "ns" : "blog.posts", "name" : "_id_" }
+{ "v" : 1, "key" : { "date" : 1 }, "ns" : "blog.posts", "name" : "date_1" }
+{ "v" : 1, "key" : { "permalink" : 1 }, "ns" : "blog.posts", "name" : "permalink_1" }
+{ "v" : 1, "key" : { "tags" : 1, "date" : -1 }, "ns" : "blog.posts", "name" : "tags_1_date_-1" }

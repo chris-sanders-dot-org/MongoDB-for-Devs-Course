@@ -1,0 +1,29 @@
+
+
+db.posts.aggregate([
+    {$group: {
+        _id : "$comments.author",
+        num_authors : {$sum:1}
+    }},
+    {$sort: {
+        num_authors : -1
+    }},{
+    $limit: 10
+    }
+])
+
+
+
+,
+
+    { $sort : { num_authors : -1 } },
+    { $limit : 10 }
+])
+
+
+
+db.posts.aggregate([{
+    $group: {
+        _id : "$comments.author"
+    }, num_authors : {$sum:1}
+}])
